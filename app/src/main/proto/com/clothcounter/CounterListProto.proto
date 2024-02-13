@@ -1,0 +1,9 @@
+syntax = "proto3";
+//package com.clothcounter;
+import "com/clothcounter/CounterProto.proto";
+//option java_multiple_files = true;
+option java_package = "com.clothcounter";
+option java_multiple_files = true;
+message CounterListProto {
+  repeated CounterProto counter = 1;
+}

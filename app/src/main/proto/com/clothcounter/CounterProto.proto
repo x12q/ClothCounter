@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+//package com.clothcounter;
+option java_package = "com.clothcounter";
+option java_multiple_files = true;
+message CounterProto {
+  string key = 1;
+  string text = 2;
+  int32 count = 3;
+  float sumFactor=4;
+}
+
+
