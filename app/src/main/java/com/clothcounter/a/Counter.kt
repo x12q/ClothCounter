@@ -25,7 +25,7 @@ data class Counter(
     }
 
     fun decreaseOne(): Counter {
-        return this.copy(count = count - 1)
+        return this.copy(count = maxOf(0,count - 1))
     }
 
     fun toProto(): CounterProto {

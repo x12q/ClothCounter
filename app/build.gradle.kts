@@ -83,6 +83,8 @@ kapt {
 
 dependencies {
     testImplementation("io.mockk:mockk:1.12.3")
+    implementation("androidx.compose.material:material:1.6.3")
+    implementation ("com.google.android.material:material:1.11.0")
 
     implementation("com.google.dagger:hilt-android:2.46")
     kapt("com.google.dagger:hilt-android-compiler:2.46")

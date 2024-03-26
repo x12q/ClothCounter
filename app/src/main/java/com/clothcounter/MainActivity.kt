@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.clothcounter.a.Counter
 import com.clothcounter.a.CounterManager
 import com.clothcounter.ui.AddPanel
+import com.clothcounter.ui.Bench
 import com.clothcounter.ui.CounterItem
 import com.clothcounter.ui.theme.ClothCounterTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,7 @@ class MainActivity : ComponentActivity() {
         manager.loadCountersFromPersistence()
         setContent {
             val list = manager.allCounters
+//            Bench()
             ClothCounterTheme {
                 Column {
                     Column(
