@@ -5,12 +5,10 @@ import com.clothcounter.CounterListProto
 import com.clothcounter.a.Counter.Companion.toModel
 import com.clothcounter.a.Counter.Companion.toProto
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CounterManagerImp @Inject constructor(
@@ -29,21 +27,20 @@ class CounterManagerImp @Inject constructor(
 
     private val counterMap get() = counterFlow.value
 
-    override suspend fun addCounter(i: Counter) {
-        val newCounters = allCounters + i
+    override suspend fun addCounter(counter: Counter) {
+        val newCounters = allCounters + counter
         dataStore.updateData {
             newCounters.toProto()
         }
     }
 
     override suspend fun updateCounter(newCounter: Counter) {
-        val newMap = counterMap.toMutableMap()
-        newMap[newCounter.key] = newCounter
+        val newMap = counterMap + (newCounter.key to newCounter)
         update(newMap)
     }
 
-    override suspend fun deleteCounter(i: Counter) {
-        val newMap = counterMap - i.key
+    override suspend fun deleteCounter(counter: Counter) {
+        val newMap = counterMap - counter.key
         update(newMap)
     }
 
