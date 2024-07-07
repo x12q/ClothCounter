@@ -28,6 +28,10 @@ data class Counter(
         return this.copy(count = maxOf(0,count - 1))
     }
 
+    fun reset():Counter{
+        return this.copy(count=0)
+    }
+
     fun toProto(): CounterProto {
         return CounterProto.newBuilder().apply {
             key = this@Counter.key

@@ -26,10 +26,10 @@ class CounterManagerImpRobolectricTest {
     val hiltRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var cm:CounterManagerImp
+    lateinit var cm: CounterManagerImp
 
     @Inject
-    lateinit var data:DataStore<CounterListProto>
+    lateinit var data: DataStore<CounterListProto>
 
     @Before
     fun bf() {
@@ -37,31 +37,33 @@ class CounterManagerImpRobolectricTest {
     }
 
     @Test
-    fun addCounter(){
-
-        val c1 = cm.allCounters.size
-
-        val dataStoreSize = runBlocking {
-            data.data.first().counterList.size
-        }
-
-        c1 shouldBe dataStoreSize
-
-        val newCounter = Counter.random()
-
-        cm.addCounter(newCounter)
-        cm.saveCounter()
-
-        val dataStoreSize1 = runBlocking {
-            data.data.first().counterList.size
-        }
-
-        dataStoreSize1 shouldBe 1
-        cm.allCounters.size shouldBeExactly 1
-
+    fun addCounter() {
         runBlocking {
-            val counterFromDataStore = data.data.first().counterList.map { it.toModel() }.first()
-            counterFromDataStore shouldBe newCounter
+
+            val c1 = cm.allCounters.size
+
+            val dataStoreSize = runBlocking {
+                data.data.first().counterList.size
+            }
+
+            c1 shouldBe dataStoreSize
+
+            val newCounter = Counter.random()
+
+            cm.addCounter(newCounter)
+
+            val dataStoreSize1 = runBlocking {
+                data.data.first().counterList.size
+            }
+
+            dataStoreSize1 shouldBe 1
+            cm.allCounters.size shouldBeExactly 1
+
+            runBlocking {
+                val counterFromDataStore =
+                    data.data.first().counterList.map { it.toModel() }.first()
+                counterFromDataStore shouldBe newCounter
+            }
         }
     }
 }

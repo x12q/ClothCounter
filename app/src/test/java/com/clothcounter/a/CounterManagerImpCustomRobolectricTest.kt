@@ -38,7 +38,8 @@ class CounterManagerImpCustomRobolectricTest {
     fun bf(){
         hiltRule.inject()
         fakeSubject = CounterManagerImp(
-            dataStore = fakeData
+            dataStore = fakeData,
+            coroutineProvider = AppCoroutineProviderImp()
         )
     }
 
